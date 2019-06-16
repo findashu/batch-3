@@ -32,7 +32,10 @@ app.get('/projects', routes.project);
 
 app.get('/signin', routes.signin);
 app.post('/signin', routes.doSignin);
+app.get('/signout', routes.signout);
+
 app.get('/admin', appMiddleware.authenticate, routes.admin);
+app.get('/admin/projects', appMiddleware.authenticate, routes.adminProjects)
 
 
 app.get('/projects/:alias', routes.projectDetail);

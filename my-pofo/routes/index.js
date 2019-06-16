@@ -37,10 +37,9 @@ module.exports.signin = (req,res) => {
     })
 }
 
-
 let users = [
-    {email:'test@test.com', password:'test'},
-    {email:'ashu@ashu.com', password:'ashu'}
+    {name:'ashu',email:'test@test.com', password:'test'},
+    {name:'ashu',email:'ashu@ashu.com', password:'ashu'}
 ]
 
 module.exports.doSignin = (req,res, next) => {
@@ -59,7 +58,24 @@ module.exports.doSignin = (req,res, next) => {
 }
 
 module.exports.admin = (req,res) => {
-    res.render('admin', {
-        title: 'Admin'
+    res.render('admin/index', {
+        title: 'Admin',
+        layout:'admin-layout'
+    })
+}
+
+
+module.exports.signout = (req,res) => {
+    req.session.isLoggedIn = false;
+    req.session.user = {};
+
+    res.redirect('/');
+}
+
+module.exports.adminProjects = (req,res) => {
+    res.render('admin/projects', {
+        title: 'Project List',
+        layout:'admin-layout',
+        projects: data.myProjects
     })
 }

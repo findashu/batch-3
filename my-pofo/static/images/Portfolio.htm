@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://127.0.0.1:5501/portfolio.html# -->
+<html lang="en" class="gr__127_0_0_1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="./Portfolio_files/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        nav {
+            background-color: aquamarine;
+        }
+
+        .myHead {}
+    </style>
+</head>
+
+<body data-gr-c-s-loaded="true">
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-item nav-link " href="http://127.0.0.1:5501/portfolio.html#">Home</a>
+        <a class="nav-item nav-link" href="http://127.0.0.1:5501/portfolio.html#">About</a>
+        <a class="nav-item nav-link" href="http://127.0.0.1:5501/portfolio.html#">Contact</a>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="myHead">Hi! I'm Ashutosh Mishra</h1>
+                <p>I’m a Software Engineer and reliability expert.
+                    ashutosh-mishraI hold a Bachelor of Technology in Computer Science and have 2 years of experience in
+                    the IT business. I use this Blog to share my experiences and my knowledge with the world.</p>
+            </div>
+            <div class="col-md-6">
+                <img class="img-responsive" width="60%" height="auto" src="./Portfolio_files/ashu.JPG" alt="findashu.com">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Blogs</h1>
+        <div class="row">
+            <div class="col-md-4 my-2">
+                <div class="card" style="width: 18rem;">
+                    <img src="./Portfolio_files/javascript.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">First Blog</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="http://127.0.0.1:5501/portfolio.html#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="./Portfolio_files/javascript.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">First Blog</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="http://127.0.0.1:5501/portfolio.html#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="./Portfolio_files/javascript.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">First Blog</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="http://127.0.0.1:5501/portfolio.html#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="./Portfolio_files/javascript.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">First Blog</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                the card's content.</p>
+                            <a href="http://127.0.0.1:5501/portfolio.html#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+
+
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>

@@ -1,0 +1,81 @@
+<main role="main">
+
+    <div class="album py-3 bg-light">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 project-detail-sb">
+                    <div class="sb-links my-2">
+                        <h2>Links</h2>
+                        <div>
+                            <a class="btn btn-primary" href="#">Live Demo</a>
+                        </div>
+                        <div class="my-2">
+                            <a class="btn btn-secondary" href="{{projectDetail.githubUrl}}">Github Url</a>
+                        </div>
+
+                    </div>
+
+                    <div class="sb-links mb-2">
+                        <h2>Tags</h2>
+
+                        <div class="my-2">
+                            {{#each projectDetail.tags}}
+
+                            <a class="badge badge-{{this.class}}" href="#">{{this.name}}</a>
+                            {{/each}}
+                        </div>
+
+                    </div>
+
+                    <div class="sb-links mb-2">
+                        <h2>Related Projects</h2>
+
+
+                        {{#each projectDetail.relatedProjects}}
+                        <div class="my-2">
+                            <a href="/projects/{{this.link}}">{{this.name}}</a>
+                        </div>
+                        {{/each}}
+
+                    </div>
+
+                    <div class="sb-links mb-2">
+                        <h2>Resources</h2>
+
+                        <div class="my-2">
+                            <a href="#">JS Console</a>
+                        </div>
+
+                        <div>
+                            <a href="#">Image Gallery</a>
+                        </div>
+
+                        <div>
+                            <a href="#">Bouncing Balls</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-9">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{projectDetail.alias}}</li>
+                        </ol>
+                    </nav>
+
+                    <h2>{{projectDetail.name}}</h2>
+                    <p>{{projectDetail.description}}</p>
+
+                    <img src="/images/js-console.png" alt="{{projectDetail.alias}}" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

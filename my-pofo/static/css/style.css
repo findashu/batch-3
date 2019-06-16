@@ -1,0 +1,22 @@
+.active {
+    color:white !important;
+    border-bottom: 1px solid white;
+}
+
+.project-detail-sb {
+    border-right: 1px solid grey;
+}
+
+.project-detail-sb h2 {
+    font-weight: bold;
+    padding: 10px 0px;
+    font-size: 1rem;
+}
+
+.sb-links {
+    border-bottom:1px solid grey;
+}
+
+.breadcrumb {
+    background-color:no
+}

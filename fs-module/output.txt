@@ -1,0 +1,1 @@
+There is no guaranteed ordering when using asynchronous methods. So the following is prone to error because the fs.stat() operation may complete before the fs.rename() operation

@@ -1,0 +1,32 @@
+
+<h1>Hi
+    {{#if name}}
+    {{name}}
+    {{else}}
+    User
+    {{/if}}
+</h1>
+
+{{{whtDng}}}
+
+<p><b>Full Name: </b> {{description.fullName}}</p>
+<p><b>Gender: </b> {{description.gender}}</p>
+<p><b>Age: </b> {{description.age}}</p>
+
+
+<ul>
+    {{#each hobbies}}
+    <li>{{this}}</li>
+    {{/each}}
+
+</ul>
+
+{{#if married}}
+<p>I am married</p>
+{{else}}
+<p>Not Married</p>
+{{/if}}
+
+
+
+<p>Testing HBS File</p>

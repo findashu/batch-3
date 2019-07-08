@@ -31,6 +31,7 @@ module.exports.projectDetail = function(req,res) {
 
 
 module.exports.signin = (req,res) => {
+   
     res.render('signin', {
         layout:'signin-layout',
         title:'SignIn'
@@ -44,11 +45,12 @@ let users = [
 
 module.exports.doSignin = (req,res, next) => {
     let bodyData = req.body;
+
+
     let usr = users.filter(e => e.email === bodyData.email)[0];
 
     console.log(usr)
     if(usr.password === bodyData.password) {
-
         req.session.user = usr;
         req.session.isLoggedIn = true;
         res.redirect('/admin')
@@ -78,4 +80,22 @@ module.exports.adminProjects = (req,res) => {
         layout:'admin-layout',
         projects: data.myProjects
     })
+}
+
+module.exports.adminProjectDetail = (req,res) =>{
+
+    let alias = req.params.alias;
+
+    let index = data.projectIndex[alias];
+    let project = data.myProjects[index];
+
+
+    res.render('admin/projectDetail', {
+        title: 'Project Detail',
+        layout:'admin-layout',
+        project:project
+    })
+
+
+
 }

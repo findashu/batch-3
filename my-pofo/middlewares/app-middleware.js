@@ -15,6 +15,8 @@ module.exports.authenticate = function (req,res, next) {
 
 // if user is loggedin send user info to view
 module.exports.authenticated = function(req,res,next) {
+
+    
     if(req.session.isLoggedIn) {
         res.locals.user = req.session.user;
         next();

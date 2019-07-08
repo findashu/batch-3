@@ -34,8 +34,10 @@ app.get('/signin', routes.signin);
 app.post('/signin', routes.doSignin);
 app.get('/signout', routes.signout);
 
-app.get('/admin', appMiddleware.authenticate, routes.admin);
-app.get('/admin/projects', appMiddleware.authenticate, routes.adminProjects)
+app.get('/admin', appMiddleware.authenticate, routes.admin); 
+app.get('/admin/projects', appMiddleware.authenticate, routes.adminProjects);
+
+app.get('/admin/projects/:alias', appMiddleware.authenticate, routes.adminProjectDetail);
 
 
 app.get('/projects/:alias', routes.projectDetail);

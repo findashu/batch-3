@@ -1,4 +1,20 @@
 const data = require('../my-data')
+const MongoClient = require('mongodb').MongoClient;
+
+const dbUrl = 'mongodb://localhost:27017';
+
+let db;
+
+MongoClient.connect(dbUrl, {useNewUrlParser: true}, function(err, client) {
+    if(err) {
+        console.log(err)
+    }else {
+        console.log('Successfuly connected to DB ');
+        db = client.db('batch-3');
+    }
+})
+
+
 
 module.exports.index = function(req,res) {
 
@@ -9,13 +25,30 @@ module.exports.index = function(req,res) {
 }
 
 
-module.exports.project = function(req, res) {
-    res.render('projects', {
-        layout:'layout',
-        title:'Projects',
-        projects: data.myProjects,
-        hasNavProject : true
+module.exports.project = function(req, res,next) {
+
+    let projectCollection = db.collection('projects');
+
+
+    projectCollection.find().toArray((err, data) => {
+        if(err) {
+            console.log(err)
+            next(err);
+        }else {
+            console.log('Project Data');
+            console.log(data)
+
+            res.render('projects', {
+                layout:'layout',
+                title:'Projects',
+                projects: data,
+                hasNavProject : true
+            })
+        }
     })
+
+
+    
 }
 
 module.exports.projectDetail = function(req,res) {
@@ -96,6 +129,40 @@ module.exports.adminProjectDetail = (req,res) =>{
         project:project
     })
 
+}
 
 
+module.exports.createProject = function(req,res) {
+    res.render('admin/create-project', {
+        title:'Create Project',
+        layout: 'admin-layout'
+    })
+}
+
+
+module.exports.doCreateProject = function (req,res,next) {
+
+    let bodyData = req.body;
+
+    let project = bodyData;
+
+
+    project.alias = bodyData.name.split(' ').join('-').toLowerCase();
+
+
+    let projectCollection = db.collection('projects');
+
+
+    projectCollection.insertOne(project, function(err,data) {
+        if(err) {
+            console.log(err)
+            next(err);
+
+        }else {
+            console.log('data created')
+          
+            res.redirect('/admin/projects');
+        }
+    })
+   
 }

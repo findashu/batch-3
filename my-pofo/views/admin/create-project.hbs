@@ -1,0 +1,61 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1 class="h2">Projects</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+           
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                Upload Demo
+            </button>
+        </div>
+    </div>
+
+
+
+    <form action="/admin/projects/create-new" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Project Name">
+                </div>
+            </div>
+
+            
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Github Link</label>
+                    <input type="text" name="githubLink" class="form-control" placeholder="Github Link">
+                </div>
+            </div>
+            
+
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Tags</label>
+                    <input type="text" name="tag" class="form-control"  placeholder="Tags">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Description</label>
+                    <input type="text" name="description" class="form-control" placeholder="Description">
+                </div>
+            </div>
+
+
+            <div class="col-6">
+
+                <a href="#">Change Cover Photo</a>
+
+            </div>
+
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Create Project</button>
+            </div>
+        </div>
+    </form>
+</main>

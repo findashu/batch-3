@@ -17,16 +17,12 @@ function logger(req,res,next) {
     next();
 }
 
-app.use(logger);
+app.use(logger)
 
-app.use(function(req,res,next) {
-    console.log('Second Middleware');
-    next();
-})
 
 
 // routes
-app.get('/', function(req,res) {
+app.get('/', function(req,res) { 
     res.render('index', {
         title:'My Home Page',
         name:'Ashutosh Mishra',
@@ -37,7 +33,8 @@ app.get('/', function(req,res) {
             age:26
         },
         hobbies: ['Football', "Music", "Reading"],
-        married : false
+        married : true,
+        headerHome : true
     })
 });
 
@@ -50,16 +47,19 @@ function aboutMiddleware(req,res,next) {
 }
 
 
-app.get('/about',aboutMiddleware, function(req,res) {
+app.get('/about', aboutMiddleware,  function(req,res, next) {
+    
+    
+    
     res.render('about', {
-        title:req.query.name
+        title:req.query.name || ''
     })
 });
 
 
 
 app.get('/test-err', function(req,res, next) {
-    fs.readFile(__dirname+'/hello.txt','utf-8', function(err, data) {
+    fs.readFile(__dirname+'/heo.txt','utf-8', function(err, data) {
         if(err) {
             next(err)
         }else {
@@ -73,7 +73,9 @@ app.get('/test-err', function(req,res, next) {
 
 
 app.use(function(req,res,next) {
-    res.status(404).send('Page Not Found');
+    res.status(404).render('404', {
+        title:'Page not Found'
+    })
 })
 
 app.use(function(err,req,res,next) {
@@ -83,3 +85,4 @@ app.use(function(err,req,res,next) {
 
 // starting server
 app.listen(3040, () => console.log('Server started on port 3040'))
+

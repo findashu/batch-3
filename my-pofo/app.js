@@ -1,7 +1,9 @@
 const express = require('express');
 const hbs = require('hbs');
 const session = require('express-session');
-const routes = require('./routes/index')
+const indexRoutes = require('./routes/index');
+const projectRoutes = require('./routes/projects');
+const adminRoutes = require('./routes/admin');
 const errorHandlers = require('./middlewares/error-handlers');
 const appMiddleware = require('./middlewares/app-middleware')
 
@@ -27,27 +29,15 @@ app.use(express.urlencoded({extended:false}));
 app.use(appMiddleware.authenticated);
 app.use(appMiddleware.logger);
 
-app.get('/', routes.index);
-app.get('/projects', routes.project);
-
-app.get('/signin', routes.signin);
-app.post('/signin', routes.doSignin);
-app.get('/signout', routes.signout);
-
-app.get('/admin', appMiddleware.authenticate, routes.admin); 
-app.get('/admin/projects', appMiddleware.authenticate, routes.adminProjects);
-
-app.get('/admin/projects/create-new', appMiddleware.authenticate, routes.createProject);
-
-app.post('/admin/projects/create-new', appMiddleware.authenticate, routes.doCreateProject);
-
-app.get('/admin/projects/:alias', appMiddleware.authenticate, routes.adminProjectDetail);
 
 
-app.get('/projects/:alias', routes.projectDetail);
+app.use('/', indexRoutes);
+
+app.use('/projects', projectRoutes);
+
+app.use('/admin',appMiddleware.authenticate, adminRoutes);
 
 app.use(errorHandlers.notFound);
-
 
 app.use(errorHandlers.handleError);
 

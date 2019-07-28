@@ -1,5 +1,10 @@
 const express = require('express');
 const router = express.Router();
+
+const Project = require('../models/projectSchema');
+const ProjectService = require('../services/projectService');
+
+
 const data = require('../my-data')
 
 
@@ -12,12 +17,29 @@ router.get('/', (req,res) => {
 
 
 
-router.get('/projects', (req,res) => {
-    res.render('admin/projects', {
-        title: 'Project List',
-        layout:'admin-layout',
-        projects: data.myProjects
-    })
+router.get('/projects', (req,res,next) => {
+
+
+    // function callback(err,data) {
+    //     if(err) {
+    //         next(err)
+    //     }else {
+    //         res.render('admin/projects', {
+    //             title: 'Project List',
+    //             layout:'admin-layout',
+    //             projects: data
+    //         })
+    //     }
+    // }
+
+    ProjectService.projectList().then(data => {
+        res.render('admin/projects', {
+            title: 'Project List',
+            layout:'admin-layout',
+            projects: data
+        })
+    }).catch(err => next(err));
+    
 })
 
 
@@ -30,29 +52,39 @@ router.get('/projects/create-new', (req,res) => {
 })
 
 
-router.post('/projects/create-new', (req,res) => {
+router.post('/projects/create-new', (req,res,next) => {
     let bodyData = req.body;
 
     let project = bodyData;
 
-
     project.alias = bodyData.name.split(' ').join('-').toLowerCase();
-    res.redirect('/admin/projects');
 
-    // let projectCollection = db.collection('projects');
+    let classes = ['primary', 'danger', 'success', 'warning'];
 
+    let tags = bodyData.tag.split(',');
 
-    // projectCollection.insertOne(project, function(err,data) {
-    //     if(err) {
-    //         console.log(err)
-    //         next(err);
+    let fT = [];
 
-    //     }else {
-    //         console.log('data created')
-          
-    //         res.redirect('/admin/projects');
-    //     }
-    // })
+    for(let i =0; i< tags.length; i++) {
+        var t = {
+            name: tags[i],
+            class: classes[i] ? classes[i] : 'info'
+        }
+        fT.push(t);
+    }
+
+    project.tags = fT || [];
+
+    let newProj = new Project(project);
+
+    newProj.save().then(data => {
+
+        console.log('saved Data', data)
+        res.redirect('/admin/projects');
+
+    }).catch(err => {
+        next(err);
+    })
 })
 
 

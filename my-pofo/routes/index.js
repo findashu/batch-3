@@ -3,20 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const data = require('../my-data')
-const MongoClient = require('mongodb').MongoClient;
 
-const dbUrl = 'mongodb://localhost:27017';
-
-let db;
-
-MongoClient.connect(dbUrl, {useNewUrlParser: true}, function(err, client) {
-    if(err) {
-        console.log(err)
-    }else {
-        console.log('Successfuly connected to DB ');
-        db = client.db('batch-3');
-    }
-})
 
 router.get('/', function(req,res) {
     res.render('index', {

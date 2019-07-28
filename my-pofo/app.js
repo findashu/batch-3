@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const hbs = require('hbs');
 const session = require('express-session');
 const indexRoutes = require('./routes/index');
@@ -12,6 +13,15 @@ const app = express();
 app.set('views', __dirname+'/views');
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname+'/views/partials')
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect('mongodb://localhost:27017/mypofo',{useNewUrlParser:true})
+    .then(
+    success => console.log('Successfully connected with DB'))
+    .catch(err => console.log('Unable to connect'))
+
+mongoose.set('useCreateIndex', true);
 
 //  middlewares
 

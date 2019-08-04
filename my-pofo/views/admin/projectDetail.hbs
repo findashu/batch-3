@@ -3,8 +3,13 @@
         <h1 class="h2">Projects</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Create New</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                <a href="/admin/projects/create-new" class="btn btn-sm btn-outline-secondary">Create Project</a>
+                
+                
+                <a href="/admin/projects/delete/{{project.alias}}" class="btn btn-sm btn-outline-secondary">Delete</a>
+
+
+
             </div>
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 Upload Demo
@@ -14,26 +19,26 @@
 
 
 
-    <form action="" method="post">
+    <form action="/admin/projects/update/{{project.alias}}" method="post">
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Name</label>
-                    <input type="text" class="form-control" value="{{project.name}}" placeholder="Project Name">
+                    <input type="text" name="name" class="form-control" value="{{project.name}}" placeholder="Project Name">
                 </div>
             </div>
 
             <div class="col-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">alias</label>
-                    <input type="text" class="form-control" placeholder="alias">
+                    <input type="text" name="alias" class="form-control" placeholder="alias" value="{{project.alias}}" disabled>
                 </div>
             </div>
 
             <div class="col-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Github Link</label>
-                    <input type="text" class="form-control" placeholder="Github Link">
+                    <input type="text" name="githubUrl" class="form-control" placeholder="Github Link" value="{{project.githubUrl}}">
                 </div>
             </div>
             
@@ -42,29 +47,25 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Tags</label>
-                    <input type="text" class="form-control"  placeholder="Tags">
+                    <input type="text" name="tags" class="form-control"  placeholder="Tags" value="{{#each project.tags}}{{this.name}},{{/each}}">
                 </div>
             </div>
 
             <div class="col-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Description</label>
-                    <input type="text" class="form-control" placeholder="Description">
+                    <input type="text" name="description" class="form-control" placeholder="Description" value="{{project.description}}">
                 </div>
             </div>
-
-
             <div class="col-6">
 
                 <a href="#">Change Cover Photo</a>
 
             </div>
 
-
             <div class="col-6">
-                <button class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
-
 
         </div>
     </form>

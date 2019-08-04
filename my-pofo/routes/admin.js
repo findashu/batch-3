@@ -89,18 +89,67 @@ router.post('/projects/create-new', (req,res,next) => {
 
 
 
-router.get('/projects/:alias', (req,res) =>{
+router.get('/projects/:alias', (req,res,next) =>{
     let alias = req.params.alias;
 
-    let index = data.projectIndex[alias];
-    let project = data.myProjects[index];
+    console.log(alias);
 
-
-    res.render('admin/projectDetail', {
-        title: 'Project Detail',
-        layout:'admin-layout',
-        project:project
-    })
+    ProjectService.getProjectDetail(alias).then(data => {
+        res.render('admin/projectDetail', {
+            title: 'Project Detail',
+            layout:'admin-layout',
+            project:data
+        })
+    }).catch(err => next(err))
+    
 })
+
+
+
+router.get('/projects/delete/:alias', (req,res,next) => {
+    let alias = req.params.alias;
+
+    console.log(alias);
+
+
+    ProjectService.deleteProject(alias).then(d => {
+        res.redirect('/admin/projects')
+    }).catch(err => next(err))
+
+
+})
+
+
+router.post('/projects/update/:alias', (req,res,next) =>{
+    let alias = req.params.alias;
+    let bodyData = req.body;
+
+    let classes = ['primary', 'danger', 'success', 'warning'];
+
+    let tags = bodyData.tags.split(',');
+
+    let fT = [];
+
+    for(let i =0; i< tags.length; i++) {
+        var t = {
+            name: tags[i],
+            class: classes[i] ? classes[i] : 'info'
+        }
+        fT.push(t);
+    }
+
+    bodyData.tags = fT ;
+    bodyData.updatedOn = new Date();
+    
+    console.log(alias);
+
+    console.log(bodyData);
+
+    ProjectService.updateProject(alias,bodyData).then(d => {
+        res.redirect('/admin/projects');
+    }).catch(err => next(err))
+
+})
+
 
 module.exports = router;

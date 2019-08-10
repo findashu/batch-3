@@ -59,8 +59,11 @@
             </div>
             <div class="col-6">
 
-                <a href="#">Change Cover Photo</a>
-
+                {{#if project.image}}
+                    <img src="{{project.image}}" alt="{{project.alias}}">
+                {{else}}
+                    <a href="/admin/projects/{{project.alias}}/upload">Change Cover Photo</a>
+                {{/if}}
             </div>
 
             <div class="col-6">

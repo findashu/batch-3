@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const UserService = require('../services/userService');
-
-
+// const { check, validationResult } = require('express-validator');
+const md5 = require('js-md5');
 
 router.get('/', function(req,res) {
     res.render('index', {
@@ -18,8 +18,20 @@ router.get('/signup', (req,res) => {
     })
 })
 
+// [check('password')
+// .isEmpty().isLength({ min: 5 }).withMessage('must be 5 chars long'),
+// check('email', 'Email is required').isEmpty().isEmail()],
+
 router.post('/signup', (req,res) => {
+
+
     let bodyData = req.body;
+
+    let encPass = md5(bodyData.password);
+
+    console.log(encPass);
+
+    bodyData.password = encPass;
 
     console.log('Signup Data', bodyData);
 
@@ -49,34 +61,22 @@ router.get('/signin' ,(req,res) => {
     })
 })
 
-let users = [
-    {name:'ashu',email:'test@test.com', password:'test'},
-    {name:'ashu',email:'ashu@ashu.com', password:'ashu'}
-]
 
 router.post('/signin',(req,res, next) => {
     let bodyData = req.body;
-    
+    let encPass = md5(bodyData.password);
+    bodyData.password = encPass;
 
-    UserService.login(bodyData.email).then(d => {
+    UserService.login(bodyData).then(d => {
         if(d) {
-            if(bodyData.password === d.password) {
-
                 req.session.user = d;
                 req.session.isLoggedIn = true;
                 res.redirect('/admin')
-            }else {
-                res.render('signin', {
-                    layout:'signin-layout',
-                    title:'SignIn',
-                    error: 'Password is Wrong'
-                })
-            }
         }else {
             res.render('signin', {
                 layout:'signin-layout',
                 title:'SignIn',
-                error: 'User not found with email'
+                error: 'Password or email is wrong'
             }) 
         }
         

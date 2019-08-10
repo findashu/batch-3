@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const validator = require('express-validator');
 const hbs = require('hbs');
 const session = require('express-session');
 const indexRoutes = require('./routes/index');
@@ -30,11 +31,16 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {maxAge: 60000}
-}))
+}));
+
+// app.use(validator());
 
 app.use(express.static(__dirname+'/static'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+
+
+
 
 app.use(appMiddleware.authenticated);
 app.use(appMiddleware.logger);

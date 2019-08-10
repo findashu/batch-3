@@ -14,10 +14,10 @@ module.exports.createUser = (data) => {
 }
 
 
-module.exports.login = (em) => {
+module.exports.login = (data) => {
     return new Promise((resolve, reject) => {
         
-        User.findOne({email: em}).then(data => {
+        User.findOne(data).then(data => {
             resolve(data)
         }).catch(err => reject(err));
 

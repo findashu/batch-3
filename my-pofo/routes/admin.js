@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const unzip = require('unzip');
+const fs = require('fs');
 const Project = require('../models/projectSchema');
 const ProjectService = require('../services/projectService');
 const path = require('path');
+const UploadService = require('../services/uploadService');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -122,7 +125,7 @@ router.get('/projects/:alias', (req,res,next) =>{
 router.get('/projects/delete/:alias', (req,res,next) => {
     let alias = req.params.alias;
 
-    console.log(alias);
+    // console.log(alias);
 
 
     ProjectService.deleteProject(alias).then(d => {
@@ -169,6 +172,7 @@ router.get('/projects/:alias/upload', (req,res) => {
     res.render('admin/upload', {
         title:'Upload Media',
         layout:'admin-layout',
+        fieldName : 'img',
         actionUrl : `/admin/projects/${req.params.alias}/upload-img`
     })
 });
@@ -185,5 +189,42 @@ router.post('/projects/:alias/upload-img', upload.single('img') ,(req,res,next) 
 
 })
 
+router.get('/projects/:alias/upload-demo', (req,res) => {
+    res.render('admin/upload', {
+        title: 'Upload Demo',
+        layout:'admin-layout',
+        fieldName: 'demo',
+        actionUrl : `/admin/projects/${req.params.alias}/upload-demo`
+    })
+});
+
+
+
+router.post('/projects/:alias/upload-demo', (req,res,next) => {
+
+    let fileName = req.params.alias+".zip";
+
+    let dir = path.join(__dirname, '../static/project-demos/'+req.params.alias);
+
+    function uploaded(err,d) {
+        if(err) {
+            next(err)
+        }else {
+
+            let path = dir+"/"+fileName
+
+            fs.createReadStream(path).pipe(unzip.Extract({path:dir}));
+
+            fs.unlinkSync(path);
+
+            res.redirect('/admin/projects');
+        }
+    }
+
+
+    UploadService.uploadDemo(req, res, fileName, dir,uploaded);
+
+    
+})
 
 module.exports = router;

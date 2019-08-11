@@ -36,11 +36,13 @@ router.post('/signup', (req,res) => {
     console.log('Signup Data', bodyData);
 
     UserService.createUser(bodyData).then(d => {
-        res.render('signin', {
-            layout:'signin-layout',
-            title:'SignIn',
-            success: 'Successfully Account Created'
-        })
+        // res.render('signin', {
+        //     layout:'signin-layout',
+        //     title:'SignIn',
+        //     success: 'Successfully Account Created'
+        // })
+
+        res.redirect('/signin')
     }).catch(err => {
         res.render('signup', {
             title : 'Create a Account',
